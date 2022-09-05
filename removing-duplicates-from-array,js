@@ -1,0 +1,31 @@
+var removeDuplicates = function(nums) {
+
+    var elementHasDuplicateInIndex = function(element) {
+        
+        let duplicate = -1;
+        let duplicateIndex;
+
+        nums.forEach((item, index) => {
+            if ((element == item) && !duplicateIndex) {
+                duplicate++;
+                if (duplicate > 0) {
+                    duplicateIndex = index;
+                }
+            }
+        })
+
+        return duplicateIndex
+
+    }
+
+    nums.forEach(item => {
+        
+        let duplicateIndex = elementHasDuplicateInIndex(item);
+
+        if (duplicateIndex != null) {
+            nums.splice(duplicateIndex, 1);
+            removeDuplicates(nums);
+        }
+    })
+
+}
